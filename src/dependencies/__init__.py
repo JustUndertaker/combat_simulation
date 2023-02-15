@@ -3,7 +3,6 @@
 """
 
 import abc
-import asyncio
 import inspect
 from dataclasses import dataclass, field
 from typing import (
@@ -190,19 +189,20 @@ class Dependent(Generic[R]):
             logger.trace(f"{self} skipped due to {e}")
             raise
 
-    async def _solve_field(self, field: ModelField, params: Dict[str, Any]) -> Any:
-        value = await cast(Param, field.field_info)._solve(**params)
+    def _solve_field(self, field: ModelField, params: Dict[str, Any]) -> Any:
+        value = cast(Param, field.field_info)._solve(**params)
         if value is Undefined:
             value = field.get_default()
         return check_field_type(field, value)
 
-    async def solve(self, **params: Any) -> Dict[str, Any]:
+    def solve(self, **params: Any) -> Dict[str, Any]:
         # solve parameterless
         for param in self.parameterless:
-            await param._solve(**params)
+            param._solve(**params)
 
         # solve param values
-        values = await asyncio.gather(
-            *(self._solve_field(field, params) for field in self.params)
-        )
+        values = []
+        for _field in self.params:
+            values.append(self._solve_field(_field, params))
+
         return {field.name: value for field, value in zip(self.params, values)}
