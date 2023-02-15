@@ -8,6 +8,7 @@ from random import randint
 from pydantic import BaseModel
 
 from ..uint.attribute import Attribute_t
+from ..utils import overrides
 
 
 class DamageType(Enum):
@@ -74,9 +75,11 @@ class DamageBase(ABC):
 class DamagePhysical(DamageBase):
     """物理伤害"""
 
+    @overrides(DamageBase)
     def get_damagetype(self) -> DamageType:
         return DamageType.Physical
 
+    @overrides(DamageBase)
     def caculate_damage(self, attacker: Attribute_t, target: Attribute_t) -> Damage_t:
         # 计算命中
         hit = attacker.HIT - target.AVD
@@ -105,9 +108,11 @@ class DamagePhysical(DamageBase):
 class DamageMagic(DamageBase):
     """魔法伤害"""
 
+    @overrides(DamageBase)
     def get_damagetype(self) -> DamageType:
         return DamageType.Magic
 
+    @overrides(DamageBase)
     def caculate_damage(self, attacker: Attribute_t, target: Attribute_t) -> Damage_t:
         damage = attacker.MGK - target.RGS
         if damage < 0:
@@ -123,9 +128,11 @@ class DamageMagic(DamageBase):
 class DamageReal(DamageBase):
     """真实伤害"""
 
+    @overrides(DamageBase)
     def get_damagetype(self) -> DamageType:
         return DamageType.Real
 
+    @overrides(DamageBase)
     def caculate_damage(self, attacker: Attribute_t, target: Attribute_t) -> Damage_t:
         return Damage_t(
             damage=attacker.ATK,
