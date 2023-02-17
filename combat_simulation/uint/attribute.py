@@ -15,19 +15,19 @@ class Attribute_t(BaseModel):
     人物属性类
     """
 
-    HP: int
+    HP: int = 1000
     """生命值"""
-    ATK: int
+    ATK: int = 10
     """物攻"""
-    DEF: int
+    DEF: int = 10
     """物防"""
-    MGK: int
+    MGK: int = 10
     """魔攻"""
-    RGS: int
+    RGS: int = 10
     """魔防"""
-    HIT: int
+    HIT: int = 80
     """命中"""
-    AVD: int
+    AVD: int = 0
     """闪避"""
 
     def __add__(self, other: "Attribute_t") -> "Attribute_t":
@@ -57,9 +57,6 @@ class Attribute_t(BaseModel):
 class UnitAttribute_t(BaseModel):
     """人物属性"""
 
-    HP: int
-    """当前生命值"""
-
     base_attribute: Attribute_t
     """基础属性"""
     base_numadd_attribute: Attribute_t
@@ -72,7 +69,7 @@ class UnitAttribute_t(BaseModel):
     """百分比加成属性"""
 
     @property
-    def MaxHP(self) -> int:
+    def HP(self) -> int:
         """最大生命值"""
         return (
             self.base_attribute.HP
@@ -193,7 +190,7 @@ class UnitAttribute_t(BaseModel):
     def panel_attribute(self) -> Attribute_t:
         """面板属性"""
         return Attribute_t(
-            HP=self.MaxHP,
+            HP=self.HP,
             ATK=self.ATK,
             DEF=self.DEF,
             MGK=self.MGK,
@@ -201,10 +198,6 @@ class UnitAttribute_t(BaseModel):
             HIT=self.HIT,
             AVD=self.AVD,
         )
-
-    def ResetHP(self) -> None:
-        """重置生命值"""
-        self.HP = self.MaxHP
 
 
 class AddAtrributeType_t(Enum):

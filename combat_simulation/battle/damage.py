@@ -40,11 +40,11 @@ class DamageStatus(Enum):
 class Damage_t(BaseModel):
     """单次伤害类"""
 
-    damage: int
+    value: int
     """伤害值"""
-    damage_type: DamageType
+    type: DamageType
     """伤害类型"""
-    damage_status: DamageStatus
+    status: DamageStatus
     """伤害状态"""
 
 
@@ -88,9 +88,9 @@ class DamagePhysical(DamageBase):
         if randint(0, 100) > hit:
             # 未命中
             return Damage_t(
-                damage=0,
-                damage_type=self.get_damagetype(),
-                damage_status=DamageStatus.Missed,
+                value=0,
+                type=self.get_damagetype(),
+                status=DamageStatus.Missed,
             )
 
         # 计算
@@ -99,9 +99,9 @@ class DamagePhysical(DamageBase):
             damage = 0
 
         return Damage_t(
-            damage=damage,
-            damage_type=self.get_damagetype(),
-            damage_status=DamageStatus.Normal,
+            value=damage,
+            type=self.get_damagetype(),
+            status=DamageStatus.Normal,
         )
 
 
@@ -119,9 +119,9 @@ class DamageMagic(DamageBase):
             damage = 0
 
         return Damage_t(
-            damage=damage,
-            damage_type=self.get_damagetype(),
-            damage_status=DamageStatus.Normal,
+            value=damage,
+            type=self.get_damagetype(),
+            status=DamageStatus.Normal,
         )
 
 
@@ -135,7 +135,7 @@ class DamageReal(DamageBase):
     @overrides(DamageBase)
     def caculate_damage(self, attacker: Attribute_t, target: Attribute_t) -> Damage_t:
         return Damage_t(
-            damage=attacker.ATK,
-            damage_type=self.get_damagetype(),
-            damage_status=DamageStatus.Normal,
+            value=attacker.ATK,
+            type=self.get_damagetype(),
+            status=DamageStatus.Normal,
         )
