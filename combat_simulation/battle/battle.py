@@ -3,9 +3,9 @@
 """
 import random
 
+from ..base.damage import Damage_t, DamageMagic, DamagePhysical, DamageReal, DamageType
 from ..record import BattleRecord, Record
 from ..uint import Unit
-from .damage import Damage_t, DamageMagic, DamagePhysical, DamageReal, DamageType
 
 
 class BattleRound:
@@ -25,7 +25,10 @@ class BattleRound:
                 damage_cal = DamageMagic()
             case DamageType.Real:
                 damage_cal = DamageReal()
-        return damage_cal.caculate_damage(attacker, target)
+        return damage_cal.caculate_damage(
+            attacker.unit_attribute.panel_attribute,
+            target.unit_attribute.panel_attribute,
+        )
 
     @classmethod
     def checkout_damage(cls, attacker: Unit, target: Unit, damage: Damage_t) -> Record:
@@ -58,6 +61,7 @@ class Battle:
     def __init__(self, attacker: Unit, target: Unit) -> None:
         self.attacker = attacker
         self.target = target
+        self.battle_record = BattleRecord()
 
     def init(self) -> None:
         """初始化参数"""

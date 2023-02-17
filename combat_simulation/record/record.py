@@ -3,7 +3,7 @@
 """
 from pydantic import BaseModel
 
-from ..battle.damage import Damage_t, DamageStatus, DamageType
+from ..base.damage import Damage_t, DamageStatus, DamageType
 
 
 class Record(BaseModel):
@@ -40,13 +40,13 @@ class Record(BaseModel):
                 _type = "真实伤害"
             case DamageType.Custom:
                 _type = "未知伤害"
-        return f"{self.attacker_name} 对 {self.target_name} {status} {self.damage.value}点的 {_type}，剩余生命值：{self.remain_hp}\n"
+        return f"{self.attacker_name} 对 {self.target_name} {status} {self.damage.value}点的 {_type}，剩余生命值：{self.remain_hp}"
 
 
 class BattleRecord(BaseModel):
     """战斗记录类"""
 
-    records: list[Record]
+    records: list[Record] = []
     """战斗记录列表"""
 
     def add(self, record: Record) -> None:

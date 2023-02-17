@@ -7,8 +7,8 @@ from random import randint
 
 from pydantic import BaseModel
 
-from ..uint.attribute import Attribute_t
 from ..utils import overrides
+from .attribute import Attribute_t
 
 
 class DamageType(Enum):

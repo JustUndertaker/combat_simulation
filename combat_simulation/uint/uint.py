@@ -2,8 +2,8 @@
 单位
 """
 
-from ..battle.damage import Damage_t, DamageStatus
-from .attribute import UnitAttribute_t
+from ..base.attribute import UnitAttribute_t
+from ..base.damage import Damage_t, DamageStatus
 
 
 class Unit:
@@ -16,7 +16,8 @@ class Unit:
     unit_attribute: UnitAttribute_t
     """单位属性"""
 
-    def __init__(self, attribute: UnitAttribute_t) -> None:
+    def __init__(self, name: str, attribute: UnitAttribute_t) -> None:
+        self.name = name
         self.unit_attribute = attribute
 
     @property
