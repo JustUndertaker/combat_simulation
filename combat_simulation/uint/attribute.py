@@ -57,140 +57,143 @@ class Attribute_t(BaseModel):
 class UnitAttribute_t(BaseModel):
     """人物属性"""
 
-    BaseAttribute: Attribute_t
+    HP: int
+    """当前生命值"""
+
+    base_attribute: Attribute_t
     """基础属性"""
-    BaseNumAddAttribute: Attribute_t
+    base_numadd_attribute: Attribute_t
     """基础数字加成属性"""
-    BasePerAddAttribute: Attribute_t
+    base_peradd_attribute: Attribute_t
     """基础百分比加成属性"""
-    NumAddAttribute: Attribute_t
+    numadd_attribute: Attribute_t
     """数字加成属性"""
-    PerAddAttribute: Attribute_t
+    peradd_attribute: Attribute_t
     """百分比加成属性"""
 
     @property
-    def HP(self) -> int:
-        """生命值"""
+    def MaxHP(self) -> int:
+        """最大生命值"""
         return (
-            self.BaseAttribute.HP
-            + self.BaseNumAddAttribute.HP
-            + self.BasePerAddAttribute.HP
-            + self.NumAddAttribute.HP
-            + self.PerAddAttribute.HP
+            self.base_attribute.HP
+            + self.base_numadd_attribute.HP
+            + self.base_peradd_attribute.HP
+            + self.numadd_attribute.HP
+            + self.peradd_attribute.HP
         )
 
     @property
     def ATK(self) -> int:
         """物理攻击力"""
         return (
-            self.BaseAttribute.ATK
-            + self.BaseNumAddAttribute.ATK
-            + self.BasePerAddAttribute.ATK
-            + self.NumAddAttribute.ATK
-            + self.PerAddAttribute.ATK
+            self.base_attribute.ATK
+            + self.base_numadd_attribute.ATK
+            + self.base_peradd_attribute.ATK
+            + self.numadd_attribute.ATK
+            + self.peradd_attribute.ATK
         )
 
     @property
     def DEF(self) -> int:
         """物理防御力"""
         return (
-            self.BaseAttribute.DEF
-            + self.BaseNumAddAttribute.DEF
-            + self.BasePerAddAttribute.DEF
-            + self.NumAddAttribute.DEF
-            + self.PerAddAttribute.DEF
+            self.base_attribute.DEF
+            + self.base_numadd_attribute.DEF
+            + self.base_peradd_attribute.DEF
+            + self.numadd_attribute.DEF
+            + self.peradd_attribute.DEF
         )
 
     @property
     def MGK(self) -> int:
         """魔法攻击力"""
         return (
-            self.BaseAttribute.MGK
-            + self.BaseNumAddAttribute.MGK
-            + self.BasePerAddAttribute.MGK
-            + self.NumAddAttribute.MGK
-            + self.PerAddAttribute.MGK
+            self.base_attribute.MGK
+            + self.base_numadd_attribute.MGK
+            + self.base_peradd_attribute.MGK
+            + self.numadd_attribute.MGK
+            + self.peradd_attribute.MGK
         )
 
     @property
     def RGS(self) -> int:
         """魔法防御力"""
         return (
-            self.BaseAttribute.RGS
-            + self.BaseNumAddAttribute.RGS
-            + self.BasePerAddAttribute.RGS
-            + self.NumAddAttribute.RGS
-            + self.PerAddAttribute.RGS
+            self.base_attribute.RGS
+            + self.base_numadd_attribute.RGS
+            + self.base_peradd_attribute.RGS
+            + self.numadd_attribute.RGS
+            + self.peradd_attribute.RGS
         )
 
     @property
     def HIT(self) -> int:
         """命中"""
         return (
-            self.BaseAttribute.HIT
-            + self.BaseNumAddAttribute.HIT
-            + self.BasePerAddAttribute.HIT
-            + self.NumAddAttribute.HIT
-            + self.PerAddAttribute.HIT
+            self.base_attribute.HIT
+            + self.base_numadd_attribute.HIT
+            + self.base_peradd_attribute.HIT
+            + self.numadd_attribute.HIT
+            + self.peradd_attribute.HIT
         )
 
     @property
     def AVD(self) -> int:
         """闪避"""
         return (
-            self.BaseAttribute.AVD
-            + self.BaseNumAddAttribute.AVD
-            + self.BasePerAddAttribute.AVD
-            + self.NumAddAttribute.AVD
-            + self.PerAddAttribute.AVD
+            self.base_attribute.AVD
+            + self.base_numadd_attribute.AVD
+            + self.base_peradd_attribute.AVD
+            + self.numadd_attribute.AVD
+            + self.peradd_attribute.AVD
         )
 
     @property
-    def BasePanelAttribute(self) -> Attribute_t:
+    def base_panel_attribute(self) -> Attribute_t:
         """基础面板攻击力"""
         return Attribute_t(
             HP=(
-                self.BaseAttribute.HP
-                + self.BaseNumAddAttribute.HP
-                + self.BasePerAddAttribute.HP
+                self.base_attribute.HP
+                + self.base_numadd_attribute.HP
+                + self.base_peradd_attribute.HP
             ),
             ATK=(
-                self.BaseAttribute.ATK
-                + self.BaseNumAddAttribute.ATK
-                + self.BasePerAddAttribute.ATK
+                self.base_attribute.ATK
+                + self.base_numadd_attribute.ATK
+                + self.base_peradd_attribute.ATK
             ),
             DEF=(
-                self.BaseAttribute.DEF
-                + self.BaseNumAddAttribute.DEF
-                + self.BasePerAddAttribute.DEF
+                self.base_attribute.DEF
+                + self.base_numadd_attribute.DEF
+                + self.base_peradd_attribute.DEF
             ),
             MGK=(
-                self.BaseAttribute.MGK
-                + self.BaseNumAddAttribute.MGK
-                + self.BasePerAddAttribute.MGK
+                self.base_attribute.MGK
+                + self.base_numadd_attribute.MGK
+                + self.base_peradd_attribute.MGK
             ),
             RGS=(
-                self.BaseAttribute.RGS
-                + self.BaseNumAddAttribute.RGS
-                + self.BasePerAddAttribute.RGS
+                self.base_attribute.RGS
+                + self.base_numadd_attribute.RGS
+                + self.base_peradd_attribute.RGS
             ),
             HIT=(
-                self.BaseAttribute.HIT
-                + self.BaseNumAddAttribute.HIT
-                + self.BasePerAddAttribute.HIT
+                self.base_attribute.HIT
+                + self.base_numadd_attribute.HIT
+                + self.base_peradd_attribute.HIT
             ),
             AVD=(
-                self.BaseAttribute.AVD
-                + self.BaseNumAddAttribute.AVD
-                + self.BasePerAddAttribute.AVD
+                self.base_attribute.AVD
+                + self.base_numadd_attribute.AVD
+                + self.base_peradd_attribute.AVD
             ),
         )
 
     @property
-    def PanelAttribute(self) -> Attribute_t:
+    def panel_attribute(self) -> Attribute_t:
         """面板属性"""
         return Attribute_t(
-            HP=self.HP,
+            HP=self.MaxHP,
             ATK=self.ATK,
             DEF=self.DEF,
             MGK=self.MGK,
@@ -198,6 +201,10 @@ class UnitAttribute_t(BaseModel):
             HIT=self.HIT,
             AVD=self.AVD,
         )
+
+    def ResetHP(self) -> None:
+        """重置生命值"""
+        self.HP = self.MaxHP
 
 
 class AddAtrributeType_t(Enum):
@@ -216,21 +223,23 @@ class AddAtrributeType_t(Enum):
 class AddAtrribute_t(BaseModel):
     """加成属性"""
 
-    AddAtrributeType: AddAtrributeType_t
+    add_atrribute_type: AddAtrributeType_t
     """加成类别"""
-    AddAtrribute: Attribute_t
+    add_atrribute: Attribute_t
     """加成参数"""
-    Added_atrribute: Attribute_t
+    added_atrribute: Attribute_t
     """实际加成的数值"""
 
     def caculate_nums(self, uint_atrribute: UnitAttribute_t) -> None:
         """计算加成属性"""
-        match self.AddAtrributeType:
+        match self.add_atrribute_type:
             case AddAtrributeType_t.BaseNum | AddAtrributeType_t.Num:
-                self.Added_atrribute = self.AddAtrribute
+                self.added_atrribute = self.add_atrribute
             case AddAtrributeType_t.BasePer:
-                self.Added_atrribute = uint_atrribute.BaseAttribute * self.AddAtrribute
+                self.added_atrribute = (
+                    uint_atrribute.base_attribute * self.add_atrribute
+                )
             case AddAtrributeType_t.Per:
-                self.Added_atrribute = (
-                    uint_atrribute.BasePanelAttribute * self.AddAtrribute
+                self.added_atrribute = (
+                    uint_atrribute.base_panel_attribute * self.add_atrribute
                 )

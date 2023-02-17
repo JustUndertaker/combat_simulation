@@ -8,8 +8,12 @@ from .attribute import UnitAttribute_t
 class Unit:
     """单位类"""
 
-    UnitAttribute: UnitAttribute_t
+    unit_attribute: UnitAttribute_t
     """单位属性"""
 
     def __init__(self, attribute: UnitAttribute_t) -> None:
-        self.UnitAttribute = attribute
+        self.unit_attribute = attribute
+
+    def ResetHP(self) -> None:
+        """重置生命值"""
+        self.unit_attribute.ResetHP()
