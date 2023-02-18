@@ -15,17 +15,17 @@ class Attribute_t(BaseModel):
     人物属性类
     """
 
-    HP: int = 1000
+    HP: int = 0
     """生命值"""
-    ATK: int = 10
+    ATK: int = 0
     """物攻"""
-    DEF: int = 10
+    DEF: int = 0
     """物防"""
-    MGK: int = 10
+    MGK: int = 0
     """魔攻"""
-    RGS: int = 10
+    RGS: int = 0
     """魔防"""
-    HIT: int = 80
+    HIT: int = 0
     """命中"""
     AVD: int = 0
     """闪避"""
@@ -57,15 +57,15 @@ class Attribute_t(BaseModel):
 class UnitAttribute_t(BaseModel):
     """人物属性"""
 
-    base_attribute: Attribute_t
+    base_attribute: Attribute_t = Attribute_t()
     """基础属性"""
-    base_numadd_attribute: Attribute_t
+    base_numadd_attribute: Attribute_t = Attribute_t()
     """基础数字加成属性"""
-    base_peradd_attribute: Attribute_t
+    base_peradd_attribute: Attribute_t = Attribute_t()
     """基础百分比加成属性"""
-    numadd_attribute: Attribute_t
+    numadd_attribute: Attribute_t = Attribute_t()
     """数字加成属性"""
-    peradd_attribute: Attribute_t
+    peradd_attribute: Attribute_t = Attribute_t()
     """百分比加成属性"""
 
     @property
