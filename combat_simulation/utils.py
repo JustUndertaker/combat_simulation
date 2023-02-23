@@ -61,3 +61,18 @@ def check_field_type(field: ModelField, value: V) -> V:
     if errs_:
         raise TypeMisMatch(field, value)
     return value
+
+
+def get_name(obj: Any) -> str:
+    """获取对象的名称"""
+    if inspect.isfunction(obj) or inspect.isclass(obj):
+        return obj.__name__
+    return obj.__class__.__name__
+
+
+def is_gen_callable(call: Callable[..., Any]) -> bool:
+    """检查 call 是否是一个生成器函数"""
+    if inspect.isgeneratorfunction(call):
+        return True
+    func_ = getattr(call, "__call__", None)
+    return inspect.isgeneratorfunction(func_)

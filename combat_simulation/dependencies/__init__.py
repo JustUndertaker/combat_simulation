@@ -19,7 +19,6 @@ from typing import (
     cast,
 )
 
-from loguru import logger
 from pydantic import BaseConfig
 from pydantic.fields import FieldInfo, ModelField, Required, Undefined
 from pydantic.schema import get_annotation_from_field_info
@@ -185,8 +184,8 @@ class Dependent(Generic[R]):
             for param in self.params:
                 cast(Param, param.field_info)._check(**params)
 
-        except SkippedException as e:
-            logger.trace(f"{self} skipped due to {e}")
+        except SkippedException:
+            # logger.trace(f"{self} skipped due to {e}")
             raise
 
     def _solve_field(self, field: ModelField, params: Dict[str, Any]) -> Any:
